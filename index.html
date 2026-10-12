@@ -25,7 +25,6 @@
     line-height:1.7;
   }
 
-  /* خلفية النجمة والهلال */
   .bg-pattern{
     position:fixed;inset:0;z-index:0;opacity:0.06;pointer-events:none;
     background-image:
@@ -40,7 +39,6 @@
     to{background-position:200px 200px, -300px 300px, 150px -150px;}
   }
 
-  /* شاشة التحميل */
   #loader{
     position:fixed;inset:0;background:var(--green-dark);z-index:9999;
     display:flex;flex-direction:column;align-items:center;justify-content:center;
@@ -62,7 +60,6 @@
   .loader-bar span{display:block;height:100%;background:var(--gold);width:0;animation:load 2s ease forwards;}
   @keyframes load{to{width:100%;}}
 
-  /* الهيدر */
   header{
     position:fixed;top:0;right:0;left:0;
     background:rgba(6,26,18,0.95);backdrop-filter:blur(10px);
@@ -98,7 +95,6 @@
     border-radius:6px;cursor:pointer;
   }
 
-  /* Hero */
   .hero{
     position:relative;z-index:1;min-height:100vh;
     display:flex;align-items:center;padding:120px 0 60px;
@@ -137,13 +133,7 @@
   .btn-primary:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(201,162,39,0.6);}
   .btn-outline{background:transparent;color:var(--gold);border:2px solid var(--gold);}
   .btn-outline:hover{background:var(--gold);color:var(--green-dark);}
-  .btn-green{
-    background:linear-gradient(135deg, var(--green-light), var(--green));
-    color:var(--cream);border:1px solid var(--gold);
-  }
-  .btn-green:hover{transform:translateY(-3px);box-shadow:0 10px 25px rgba(26,122,82,0.5);}
 
-  /* بطاقة رئيس الوزراء */
   .pm-card{
     background:linear-gradient(145deg, #0d3d28, #0a2e1f);
     border:2px solid var(--gold);border-radius:20px;padding:30px;
@@ -174,6 +164,17 @@
     display:flex;align-items:center;justify-content:center;
     color:var(--gold);font-size:18px;
   }
+  .pm-photo{
+    width:130px;height:130px;border-radius:50%;
+    margin:0 auto 20px;overflow:hidden;
+    border:3px solid var(--gold);
+    box-shadow:0 0 30px rgba(201,162,39,0.4);
+    position:relative;z-index:1;
+    background:linear-gradient(145deg, var(--green), var(--green-dark));
+  }
+  .pm-photo img{
+    width:100%;height:100%;object-fit:cover;object-position:center top;display:block;
+  }
   .pm-row{
     display:flex;justify-content:space-between;padding:12px 0;
     border-bottom:1px solid rgba(201,162,39,0.1);position:relative;z-index:1;
@@ -187,7 +188,6 @@
     border-radius:50px;color:#4ade80;font-size:13px;font-weight:700;
   }
 
-  /* عناوين الأقسام */
   section{padding:80px 0;position:relative;z-index:1;}
   .section-title{text-align:center;margin-bottom:50px;}
   .section-title h2{
@@ -206,24 +206,31 @@
   }
   .section-title p{color:rgba(245,240,225,0.6);font-size:16px;}
 
-  /* عن رئيس الوزراء */
-  .about-grid{display:grid;grid-template-columns:1fr 1.5fr;gap:40px;align-items:center;}
+  .about-grid{display:grid;grid-template-columns:1fr 1.5fr;gap:50px;align-items:center;}
   .about-avatar{
-    width:250px;height:250px;margin:0 auto;border-radius:50%;
-    background:linear-gradient(145deg, var(--green), var(--green-dark));
-    border:4px solid var(--gold);display:flex;align-items:center;justify-content:center;
-    font-size:100px;color:var(--gold);
-    box-shadow:0 0 60px rgba(201,162,39,0.3);
+    width:280px;height:280px;margin:0 auto;
+    border-radius:50%;overflow:hidden;
+    border:5px solid var(--gold);
+    box-shadow:0 0 60px rgba(201,162,39,0.5);
     position:relative;
+    background:linear-gradient(145deg, var(--green), var(--green-dark));
   }
   .about-avatar::before{
-    content:'';position:absolute;inset:-15px;
-    border-radius:50%;border:2px dashed rgba(201,162,39,0.4);
-    animation:rotate 20s linear infinite;
+    content:'';position:absolute;inset:-18px;
+    border-radius:50%;border:2px dashed rgba(201,162,39,0.5);
+    animation:rotate 25s linear infinite;
+    z-index:1;pointer-events:none;
+  }
+  .about-avatar img{
+    width:100%;height:100%;
+    object-fit:cover;
+    object-position:center top;
+    display:block;
+    position:relative;z-index:0;
   }
   @keyframes rotate{to{transform:rotate(360deg);}}
   .about-text h3{
-    color:var(--gold);font-family:'Amiri',serif;font-size:30px;margin-bottom:15px;
+    color:var(--gold);font-family:'Amiri',serif;font-size:32px;margin-bottom:15px;
   }
   .about-text .role-line{
     color:var(--gold-light);font-size:17px;font-weight:600;margin-bottom:20px;
@@ -236,7 +243,6 @@
     color:var(--gold-light);font-size:13px;font-weight:600;
   }
 
-  /* البرنامج الحكومي */
   .program-grid{
     display:grid;grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));gap:25px;
   }
@@ -263,7 +269,6 @@
   .program-card h3{color:var(--gold);font-size:19px;margin-bottom:10px;}
   .program-card p{color:rgba(245,240,225,0.75);font-size:14px;line-height:1.8;}
 
-  /* الأخبار */
   .news-grid{
     display:grid;grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));gap:25px;
   }
@@ -288,7 +293,6 @@
   .news-body h4{color:var(--gold);font-size:17px;margin-bottom:10px;}
   .news-body p{color:rgba(245,240,225,0.75);font-size:14px;line-height:1.8;}
 
-  /* القرارات */
   .decisions-list{max-width:900px;margin:0 auto;}
   .decision-item{
     background:rgba(15,77,51,0.3);
@@ -306,7 +310,19 @@
   .decision-item h4{color:var(--gold-light);font-size:17px;margin-bottom:8px;}
   .decision-item p{color:rgba(245,240,225,0.8);font-size:14px;}
 
-  /* دليل الوزارات */
+  .stats{
+    background:linear-gradient(135deg, var(--green-dark), var(--green));
+    border-top:2px solid var(--gold);border-bottom:2px solid var(--gold);
+  }
+  .stats-grid{
+    display:grid;grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));
+    gap:30px;text-align:center;
+  }
+  .stat-item .num{
+    font-size:48px;font-weight:900;color:var(--gold);font-family:'Amiri',serif;
+  }
+  .stat-item .lbl{color:var(--cream);font-size:15px;margin-top:5px;}
+
   .ministries-grid{
     display:grid;grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));gap:20px;
   }
@@ -322,21 +338,6 @@
   .ministry-card h4{color:var(--gold);font-size:16px;margin-bottom:8px;}
   .ministry-card p{color:rgba(245,240,225,0.6);font-size:13px;}
 
-  /* الإحصائيات */
-  .stats{
-    background:linear-gradient(135deg, var(--green-dark), var(--green));
-    border-top:2px solid var(--gold);border-bottom:2px solid var(--gold);
-  }
-  .stats-grid{
-    display:grid;grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));
-    gap:30px;text-align:center;
-  }
-  .stat-item .num{
-    font-size:48px;font-weight:900;color:var(--gold);font-family:'Amiri',serif;
-  }
-  .stat-item .lbl{color:var(--cream);font-size:15px;margin-top:5px;}
-
-  /* الخدمات */
   .services-grid{
     display:grid;grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));gap:25px;
   }
@@ -357,7 +358,6 @@
   .service-card h4{color:var(--gold);font-size:17px;margin-bottom:10px;}
   .service-card p{color:rgba(245,240,225,0.7);font-size:14px;}
 
-  /* التصويت */
   .vote-box{
     max-width:700px;margin:0 auto;
     background:linear-gradient(145deg, #0d3d28, #061a12);
@@ -410,7 +410,6 @@
     border:1px solid var(--green-light);border-radius:10px;
   }
 
-  /* التواصل */
   .contact-wrap{
     display:grid;grid-template-columns:1fr 1.2fr;gap:40px;
     background:rgba(15,77,51,0.3);
@@ -452,7 +451,6 @@
   .contact-form textarea{resize:vertical;min-height:110px;}
   .contact-form button{width:100%;justify-content:center;}
 
-  /* الفوتر */
   footer{
     background:var(--green-dark);border-top:2px solid var(--gold);
     padding:50px 0 20px;position:relative;z-index:1;
@@ -478,7 +476,6 @@
   }
   .footer-bottom span{color:var(--gold);}
 
-  /* زر العودة للأعلى */
   #toTop{
     position:fixed;bottom:25px;left:25px;
     width:50px;height:50px;border-radius:50%;
@@ -491,11 +488,10 @@
   #toTop.show{display:flex;}
   #toTop:hover{transform:translateY(-5px);}
 
-  /* Responsive */
   @media (max-width:900px){
     .hero-grid{grid-template-columns:1fr;gap:40px;}
     .hero h2{font-size:38px;}
-    .about-grid{grid-template-columns:1fr;}
+    .about-grid{grid-template-columns:1fr;gap:30px;}
     .contact-wrap{grid-template-columns:1fr;}
     .footer-grid{grid-template-columns:1fr 1fr;}
     nav ul{
@@ -515,6 +511,7 @@
     .contact-wrap{padding:25px;}
     .vote-box{padding:25px;}
     .footer-grid{grid-template-columns:1fr;}
+    .about-avatar{width:220px;height:220px;}
   }
 
   .reveal{opacity:0;transform:translateY(30px);transition:all 0.8s ease;}
@@ -523,7 +520,6 @@
 </head>
 <body>
 
-<!-- شاشة التحميل -->
 <div id="loader">
   <div class="loader-emblem">☪</div>
   <div class="loader-text">الدولة القريفانية</div>
@@ -532,7 +528,6 @@
 
 <div class="bg-pattern"></div>
 
-<!-- الهيدر -->
 <header>
   <div class="container nav-wrap">
     <a href="#home" class="brand">
@@ -558,7 +553,6 @@
   </div>
 </header>
 
-<!-- Hero -->
 <section class="hero" id="home">
   <div class="container hero-grid">
     <div class="hero-text">
@@ -578,6 +572,9 @@
           <p style="font-size:12px;color:rgba(245,240,225,0.6);">Prime Minister ID</p>
         </div>
         <div class="flag"></div>
+      </div>
+      <div class="pm-photo">
+        <img src="pm.jpg" alt="رئيس الوزراء">
       </div>
       <div class="pm-row">
         <span class="label">الاسم الكامل</span>
@@ -603,7 +600,6 @@
   </div>
 </section>
 
-<!-- عن رئيس الوزراء -->
 <section id="about" style="background:rgba(10,46,31,0.4);">
   <div class="container">
     <div class="section-title">
@@ -612,7 +608,9 @@
       <p>نبذة تعريفية عن معالي رئيس الوزراء</p>
     </div>
     <div class="about-grid">
-      <div class="about-avatar reveal">👤</div>
+      <div class="about-avatar reveal">
+        <img src="pm.jpg" alt="رئيس الوزراء">
+      </div>
       <div class="about-text reveal">
         <h3>Eng / Kareem Akrab</h3>
         <p class="role-line">رئيس وزراء الدولة القريفانية</p>
@@ -636,7 +634,6 @@
   </div>
 </section>
 
-<!-- البرنامج الحكومي -->
 <section id="program">
   <div class="container">
     <div class="section-title">
@@ -684,7 +681,6 @@
   </div>
 </section>
 
-<!-- الأخبار -->
 <section id="news" style="background:rgba(10,46,31,0.4);">
   <div class="container">
     <div class="section-title">
@@ -727,7 +723,6 @@
   </div>
 </section>
 
-<!-- القرارات -->
 <section id="decisions">
   <div class="container">
     <div class="section-title">
@@ -760,7 +755,6 @@
   </div>
 </section>
 
-<!-- الإحصائيات -->
 <section class="stats">
   <div class="container">
     <div class="stats-grid">
@@ -784,7 +778,6 @@
   </div>
 </section>
 
-<!-- الوزارات -->
 <section id="ministries">
   <div class="container">
     <div class="section-title">
@@ -837,7 +830,6 @@
   </div>
 </section>
 
-<!-- الخدمات -->
 <section id="services" style="background:rgba(10,46,31,0.4);">
   <div class="container">
     <div class="section-title">
@@ -870,7 +862,6 @@
   </div>
 </section>
 
-<!-- التصويت -->
 <section id="vote">
   <div class="container">
     <div class="section-title">
@@ -918,7 +909,6 @@
   </div>
 </section>
 
-<!-- التواصل -->
 <section id="contact" style="background:rgba(10,46,31,0.4);">
   <div class="container">
     <div class="section-title">
@@ -961,7 +951,6 @@
   </div>
 </section>
 
-<!-- الفوتر -->
 <footer>
   <div class="container">
     <div class="footer-grid">
@@ -1012,25 +1001,21 @@
 <button id="toTop">↑</button>
 
 <script>
-  // شاشة التحميل
   window.addEventListener('load', () => {
     setTimeout(() => document.getElementById('loader').classList.add('hide'), 1800);
   });
 
-  // قائمة الموبايل
   const menuBtn = document.getElementById('menuBtn');
   const navMenu = document.getElementById('navMenu');
   menuBtn.addEventListener('click', () => navMenu.classList.toggle('open'));
   navMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navMenu.classList.remove('open')));
 
-  // ظهور العناصر
   const reveals = document.querySelectorAll('.reveal');
   const io = new IntersectionObserver((entries) => {
     entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('active'); });
   }, {threshold: 0.15});
   reveals.forEach(r => io.observe(r));
 
-  // العدادات
   const counters = document.querySelectorAll('.num');
   const counterObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -1050,12 +1035,10 @@
   }, {threshold: 0.5});
   counters.forEach(c => counterObserver.observe(c));
 
-  // زر العودة للأعلى
   const toTop = document.getElementById('toTop');
   window.addEventListener('scroll', () => toTop.classList.toggle('show', window.scrollY > 500));
   toTop.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
 
-  // نظام التصويت
   const voteOptions = document.querySelectorAll('.vote-option');
   let selectedVote = null;
   voteOptions.forEach(opt => {
@@ -1071,9 +1054,7 @@
       alert('⚠️ من فضلك اختر إجابة أولاً');
       return;
     }
-    // نتائج افتراضية
     const results = {yes: 68, no: 12, maybe: 20};
-    // نزود صوت المستخدم
     results[selectedVote] += 1;
     const total = results.yes + results.no + results.maybe;
     const pct = {
@@ -1081,7 +1062,6 @@
       no: Math.round(results.no / total * 100),
       maybe: Math.round(results.maybe / total * 100)
     };
-
     document.getElementById('voteResult').classList.add('show');
     setTimeout(() => {
       document.getElementById('fill-yes').style.width = pct.yes + '%';
@@ -1097,4 +1077,4 @@
 </script>
 
 </body>
-  </html>
+</html>
