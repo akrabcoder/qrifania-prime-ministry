@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>رئاسة الوزراء — الدولة القريفانية</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Amiri:wght@700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --green-dark:#0a2e1f;
+    --green:#0f4d33;
+    --green-light:#1a7a52;
+    --gold:#c9a227;
+    --gold-light:#e8c547;
+    --cream:#f5f0e1;
+    --bg:#061a12;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Cairo',sans-serif;
+    background:var(--bg);
+    color:var(--cream);
+    overflow-x:hidden;
+    line-height:1.7;
+  }
+
+  /* خلفية النجمة والهلال */
+  .bg-pattern{
+    position:fixed;inset:0;z-index:0;opacity:0.06;pointer-events:none;
+    background-image:
+      radial-gradient(circle at 20% 30%, var(--gold) 2px, transparent 2px),
+      radial-gradient(circle at 80% 70%, var(--gold) 2px, transparent 2px),
+      radial-gradient(circle at 50% 50%, var(--gold) 1px, transparent 1px);
+    background-size:200px 200px, 300px 300px, 150px 150px;
+    animation:floatBg 60s linear infinite;
+  }
+  @keyframes floatBg{
+    from{background-position:0 0, 0 0, 0 0;}
+    to{background-position:200px 200px, -300px 300px, 150px -150px;}
+  }
+
+  /* شاشة التحميل */
+  #loader{
+    position:fixed;inset:0;background:var(--green-dark);z-index:9999;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    transition:opacity 0.8s ease, visibility 0.8s;
+  }
+  #loader.hide{opacity:0;visibility:hidden;}
+  .loader-emblem{
+    width:100px;height:100px;border-radius:50%;
+    background:radial-gradient(circle, var(--green) 0%, var(--green-dark) 100%);
+    border:3px solid var(--gold);
+    display:flex;align-items:center;justify-content:center;
+    font-size:50px;color:var(--gold);
+    animation:pulse 1.5s ease-in-out infinite;
+    box-shadow:0 0 40px rgba(201,162,39,0.5);
+  }
+  @keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.1);}}
+  .loader-text{margin-top:20px;color:var(--gold);font-size:18px;letter-spacing:2px;}
+  .loader-bar{width:200px;height:3px;background:rgba(201,162,39,0.2);margin-top:15px;border-radius:3px;overflow:hidden;}
+  .loader-bar span{display:block;height:100%;background:var(--gold);width:0;animation:load 2s ease forwards;}
+  @keyframes load{to{width:100%;}}
+
+  /* الهيدر */
+  header{
+    position:fixed;top:0;right:0;left:0;
+    background:rgba(6,26,18,0.95);backdrop-filter:blur(10px);
+    border-bottom:1px solid rgba(201,162,39,0.3);
+    z-index:1000;padding:12px 0;transition:all 0.3s;
+  }
+  .container{max-width:1200px;margin:0 auto;padding:0 20px;}
+  .nav-wrap{display:flex;justify-content:space-between;align-items:center;gap:15px;}
+  .brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--cream);}
+  .brand-emblem{
+    width:50px;height:50px;border-radius:50%;
+    background:radial-gradient(circle, var(--green) 0%, var(--green-dark) 100%);
+    border:2px solid var(--gold);
+    display:flex;align-items:center;justify-content:center;
+    font-size:24px;color:var(--gold);flex-shrink:0;
+  }
+  .brand-text h1{font-family:'Amiri',serif;font-size:18px;color:var(--gold);line-height:1.2;}
+  .brand-text p{font-size:11px;color:rgba(245,240,225,0.7);}
+  nav ul{display:flex;list-style:none;gap:22px;}
+  nav a{
+    color:var(--cream);text-decoration:none;font-size:14px;font-weight:600;
+    transition:color 0.3s;position:relative;
+  }
+  nav a::after{
+    content:'';position:absolute;bottom:-5px;right:0;
+    width:0;height:2px;background:var(--gold);transition:width 0.3s;
+  }
+  nav a:hover{color:var(--gold);}
+  nav a:hover::after{width:100%;}
+  .menu-btn{
+    display:none;background:none;border:1px solid var(--gold);
+    color:var(--gold);font-size:22px;padding:5px 12px;
+    border-radius:6px;cursor:pointer;
+  }
+
+  /* Hero */
+  .hero{
+    position:relative;z-index:1;min-height:100vh;
+    display:flex;align-items:center;padding:120px 0 60px;
+    background:
+      radial-gradient(circle at 20% 20%, rgba(26,122,82,0.3) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(201,162,39,0.15) 0%, transparent 50%),
+      var(--bg);
+  }
+  .hero-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:50px;align-items:center;}
+  .hero-badge{
+    display:inline-block;padding:6px 18px;
+    background:rgba(201,162,39,0.15);border:1px solid var(--gold);
+    border-radius:50px;color:var(--gold);font-size:13px;font-weight:600;
+    margin-bottom:20px;letter-spacing:1px;
+  }
+  .hero h2{
+    font-family:'Amiri',serif;font-size:52px;
+    color:var(--cream);line-height:1.2;margin-bottom:15px;
+  }
+  .hero h2 span{color:var(--gold);}
+  .hero .role{font-size:22px;color:var(--gold-light);margin-bottom:15px;font-weight:600;}
+  .hero .edu{
+    font-size:16px;color:rgba(245,240,225,0.85);
+    margin-bottom:30px;padding-right:15px;border-right:3px solid var(--gold);
+  }
+  .hero-btns{display:flex;gap:15px;flex-wrap:wrap;}
+  .btn{
+    padding:14px 30px;border-radius:8px;font-family:'Cairo',sans-serif;
+    font-size:15px;font-weight:700;text-decoration:none;cursor:pointer;
+    transition:all 0.3s;border:none;display:inline-flex;align-items:center;gap:8px;
+  }
+  .btn-primary{
+    background:linear-gradient(135deg, var(--gold), var(--gold-light));
+    color:var(--green-dark);box-shadow:0 8px 25px rgba(201,162,39,0.4);
+  }
+  .btn-primary:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(201,162,39,0.6);}
+  .btn-outline{background:transparent;color:var(--gold);border:2px solid var(--gold);}
+  .btn-outline:hover{background:var(--gold);color:var(--green-dark);}
+  .btn-green{
+    background:linear-gradient(135deg, var(--green-light), var(--green));
+    color:var(--cream);border:1px solid var(--gold);
+  }
+  .btn-green:hover{transform:translateY(-3px);box-shadow:0 10px 25px rgba(26,122,82,0.5);}
+
+  /* بطاقة رئيس الوزراء */
+  .pm-card{
+    background:linear-gradient(145deg, #0d3d28, #0a2e1f);
+    border:2px solid var(--gold);border-radius:20px;padding:30px;
+    position:relative;overflow:hidden;
+    box-shadow:0 20px 60px rgba(0,0,0,0.5), inset 0 0 40px rgba(201,162,39,0.05);
+  }
+  .pm-card::before{
+    content:'☪';position:absolute;top:-30px;left:-30px;
+    font-size:200px;color:rgba(201,162,39,0.05);line-height:1;
+  }
+  .pm-card::after{
+    content:'★';position:absolute;bottom:-40px;right:-20px;
+    font-size:180px;color:rgba(201,162,39,0.05);line-height:1;
+  }
+  .pm-card-header{
+    display:flex;justify-content:space-between;align-items:center;
+    border-bottom:1px dashed rgba(201,162,39,0.4);
+    padding-bottom:15px;margin-bottom:20px;position:relative;z-index:1;
+  }
+  .pm-card-header h3{color:var(--gold);font-size:16px;}
+  .pm-card-header .flag{
+    width:50px;height:35px;
+    background:linear-gradient(to bottom, #1a7a52 33%, #f5f0e1 33% 66%, #c9a227 66%);
+    border-radius:4px;border:1px solid var(--gold);position:relative;
+  }
+  .pm-card-header .flag::after{
+    content:'☪';position:absolute;inset:0;
+    display:flex;align-items:center;justify-content:center;
+    color:var(--gold);font-size:18px;
+  }
+  .pm-row{
+    display:flex;justify-content:space-between;padding:12px 0;
+    border-bottom:1px solid rgba(201,162,39,0.1);position:relative;z-index:1;
+  }
+  .pm-row .label{color:rgba(245,240,225,0.6);font-size:13px;}
+  .pm-row .value{color:var(--cream);font-weight:700;font-size:15px;}
+  .pm-row .value.gold{color:var(--gold);}
+  .pm-status{
+    display:inline-block;padding:4px 14px;
+    background:rgba(26,122,82,0.3);border:1px solid var(--green-light);
+    border-radius:50px;color:#4ade80;font-size:13px;font-weight:700;
+  }
+
+  /* عناوين الأقسام */
+  section{padding:80px 0;position:relative;z-index:1;}
+  .section-title{text-align:center;margin-bottom:50px;}
+  .section-title h2{
+    font-family:'Amiri',serif;font-size:42px;
+    color:var(--gold);margin-bottom:10px;
+  }
+  .section-title .divider{
+    width:80px;height:3px;
+    background:linear-gradient(to left, transparent, var(--gold), transparent);
+    margin:0 auto 15px;position:relative;
+  }
+  .section-title .divider::after{
+    content:'★';position:absolute;top:-12px;right:50%;
+    transform:translateX(50%);color:var(--gold);font-size:16px;
+    background:var(--bg);padding:0 8px;
+  }
+  .section-title p{color:rgba(245,240,225,0.6);font-size:16px;}
+
+  /* عن رئيس الوزراء */
+  .about-grid{display:grid;grid-template-columns:1fr 1.5fr;gap:40px;align-items:center;}
+  .about-avatar{
+    width:250px;height:250px;margin:0 auto;border-radius:50%;
+    background:linear-gradient(145deg, var(--green), var(--green-dark));
+    border:4px solid var(--gold);display:flex;align-items:center;justify-content:center;
+    font-size:100px;color:var(--gold);
+    box-shadow:0 0 60px rgba(201,162,39,0.3);
+    position:relative;
+  }
+  .about-avatar::before{
+    content:'';position:absolute;inset:-15px;
+    border-radius:50%;border:2px dashed rgba(201,162,39,0.4);
+    animation:rotate 20s linear infinite;
+  }
+  @keyframes rotate{to{transform:rotate(360deg);}}
+  .about-text h3{
+    color:var(--gold);font-family:'Amiri',serif;font-size:30px;margin-bottom:15px;
+  }
+  .about-text .role-line{
+    color:var(--gold-light);font-size:17px;font-weight:600;margin-bottom:20px;
+  }
+  .about-text p{color:rgba(245,240,225,0.85);margin-bottom:15px;font-size:15px;line-height:1.9;}
+  .about-tags{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px;}
+  .about-tag{
+    padding:6px 16px;background:rgba(201,162,39,0.1);
+    border:1px solid rgba(201,162,39,0.4);border-radius:50px;
+    color:var(--gold-light);font-size:13px;font-weight:600;
+  }
+
+  /* البرنامج الحكومي */
+  .program-grid{
+    display:grid;grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));gap:25px;
+  }
+  .program-card{
+    background:linear-gradient(145deg, rgba(15,77,51,0.5), rgba(10,46,31,0.8));
+    border:1px solid rgba(201,162,39,0.25);border-radius:16px;
+    padding:30px 25px;transition:all 0.4s;position:relative;overflow:hidden;
+  }
+  .program-card::before{
+    content:'';position:absolute;top:0;right:0;width:60px;height:60px;
+    background:radial-gradient(circle at top right, rgba(201,162,39,0.3), transparent 70%);
+  }
+  .program-card:hover{
+    transform:translateY(-8px);border-color:var(--gold);
+    box-shadow:0 20px 40px rgba(0,0,0,0.4);
+  }
+  .program-icon{
+    width:60px;height:60px;border-radius:12px;
+    background:linear-gradient(135deg, var(--green-light), var(--green));
+    border:2px solid var(--gold);
+    display:flex;align-items:center;justify-content:center;
+    font-size:28px;margin-bottom:20px;
+  }
+  .program-card h3{color:var(--gold);font-size:19px;margin-bottom:10px;}
+  .program-card p{color:rgba(245,240,225,0.75);font-size:14px;line-height:1.8;}
+
+  /* الأخبار */
+  .news-grid{
+    display:grid;grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));gap:25px;
+  }
+  .news-card{
+    background:linear-gradient(145deg, #0d3d28, #061a12);
+    border:1px solid rgba(201,162,39,0.25);border-radius:16px;
+    overflow:hidden;transition:all 0.4s;
+  }
+  .news-card:hover{transform:translateY(-6px);border-color:var(--gold);box-shadow:0 20px 40px rgba(0,0,0,0.4);}
+  .news-head{
+    background:linear-gradient(135deg, var(--green), var(--green-dark));
+    padding:20px;border-bottom:2px solid var(--gold);
+    display:flex;justify-content:space-between;align-items:center;
+  }
+  .news-head .cat{
+    padding:4px 12px;background:rgba(201,162,39,0.2);
+    border:1px solid var(--gold);border-radius:50px;
+    color:var(--gold);font-size:12px;font-weight:700;
+  }
+  .news-head .date{color:rgba(245,240,225,0.7);font-size:12px;}
+  .news-body{padding:22px;}
+  .news-body h4{color:var(--gold);font-size:17px;margin-bottom:10px;}
+  .news-body p{color:rgba(245,240,225,0.75);font-size:14px;line-height:1.8;}
+
+  /* القرارات */
+  .decisions-list{max-width:900px;margin:0 auto;}
+  .decision-item{
+    background:rgba(15,77,51,0.3);
+    border:1px solid rgba(201,162,39,0.25);
+    border-right:4px solid var(--gold);
+    border-radius:12px;padding:22px 25px;margin-bottom:18px;
+    transition:all 0.3s;
+  }
+  .decision-item:hover{background:rgba(15,77,51,0.6);transform:translateX(-5px);}
+  .decision-item .dnum{
+    display:inline-block;padding:3px 12px;
+    background:var(--gold);color:var(--green-dark);
+    border-radius:50px;font-size:12px;font-weight:900;margin-bottom:10px;
+  }
+  .decision-item h4{color:var(--gold-light);font-size:17px;margin-bottom:8px;}
+  .decision-item p{color:rgba(245,240,225,0.8);font-size:14px;}
+
+  /* دليل الوزارات */
+  .ministries-grid{
+    display:grid;grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));gap:20px;
+  }
+  .ministry-card{
+    background:rgba(15,77,51,0.3);
+    border:1px solid rgba(201,162,39,0.2);
+    border-radius:12px;padding:25px 20px;text-align:center;transition:all 0.3s;
+  }
+  .ministry-card:hover{
+    background:rgba(15,77,51,0.6);border-color:var(--gold);transform:scale(1.03);
+  }
+  .ministry-card .icon{font-size:36px;margin-bottom:12px;}
+  .ministry-card h4{color:var(--gold);font-size:16px;margin-bottom:8px;}
+  .ministry-card p{color:rgba(245,240,225,0.6);font-size:13px;}
+
+  /* الإحصائيات */
+  .stats{
+    background:linear-gradient(135deg, var(--green-dark), var(--green));
+    border-top:2px solid var(--gold);border-bottom:2px solid var(--gold);
+  }
+  .stats-grid{
+    display:grid;grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));
+    gap:30px;text-align:center;
+  }
+  .stat-item .num{
+    font-size:48px;font-weight:900;color:var(--gold);font-family:'Amiri',serif;
+  }
+  .stat-item .lbl{color:var(--cream);font-size:15px;margin-top:5px;}
+
+  /* الخدمات */
+  .services-grid{
+    display:grid;grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));gap:25px;
+  }
+  .service-card{
+    background:linear-gradient(145deg, #0d3d28, #061a12);
+    border:1px solid rgba(201,162,39,0.3);border-radius:16px;
+    padding:30px 25px;text-align:center;transition:all 0.4s;cursor:pointer;
+  }
+  .service-card:hover{
+    border-color:var(--gold);box-shadow:0 0 30px rgba(201,162,39,0.2);
+    transform:translateY(-5px);
+  }
+  .service-card .icon{
+    width:70px;height:70px;margin:0 auto 20px;border-radius:50%;
+    background:rgba(201,162,39,0.1);border:2px solid var(--gold);
+    display:flex;align-items:center;justify-content:center;font-size:32px;
+  }
+  .service-card h4{color:var(--gold);font-size:17px;margin-bottom:10px;}
+  .service-card p{color:rgba(245,240,225,0.7);font-size:14px;}
+
+  /* التصويت */
+  .vote-box{
+    max-width:700px;margin:0 auto;
+    background:linear-gradient(145deg, #0d3d28, #061a12);
+    border:2px solid var(--gold);border-radius:20px;padding:40px;
+    box-shadow:0 20px 60px rgba(0,0,0,0.5);
+  }
+  .vote-box h3{color:var(--gold);text-align:center;font-size:22px;margin-bottom:10px;}
+  .vote-box .sub{text-align:center;color:rgba(245,240,225,0.7);margin-bottom:30px;font-size:14px;}
+  .vote-option{
+    display:flex;align-items:center;gap:15px;
+    padding:18px 22px;margin-bottom:15px;
+    background:rgba(15,77,51,0.4);
+    border:2px solid rgba(201,162,39,0.3);
+    border-radius:12px;cursor:pointer;transition:all 0.3s;
+  }
+  .vote-option:hover{border-color:var(--gold);background:rgba(15,77,51,0.7);}
+  .vote-option.selected{
+    border-color:var(--gold);background:rgba(201,162,39,0.15);
+    box-shadow:0 0 20px rgba(201,162,39,0.3);
+  }
+  .vote-option .radio{
+    width:24px;height:24px;border-radius:50%;
+    border:2px solid var(--gold);flex-shrink:0;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .vote-option.selected .radio::after{
+    content:'';width:12px;height:12px;border-radius:50%;background:var(--gold);
+  }
+  .vote-option .text{color:var(--cream);font-size:15px;font-weight:600;}
+  .vote-result{
+    display:none;margin-top:25px;padding-top:25px;
+    border-top:1px dashed rgba(201,162,39,0.4);
+  }
+  .vote-result.show{display:block;}
+  .result-bar{margin-bottom:18px;}
+  .result-bar .top{display:flex;justify-content:space-between;margin-bottom:6px;font-size:13px;}
+  .result-bar .top .name{color:var(--cream);}
+  .result-bar .top .pct{color:var(--gold);font-weight:700;}
+  .result-bar .track{
+    height:10px;background:rgba(201,162,39,0.15);
+    border-radius:50px;overflow:hidden;
+  }
+  .result-bar .fill{
+    height:100%;background:linear-gradient(90deg, var(--gold), var(--gold-light));
+    border-radius:50px;width:0;transition:width 1s ease;
+  }
+  .vote-thanks{
+    text-align:center;color:#4ade80;font-weight:700;margin-top:20px;
+    padding:15px;background:rgba(26,122,82,0.2);
+    border:1px solid var(--green-light);border-radius:10px;
+  }
+
+  /* التواصل */
+  .contact-wrap{
+    display:grid;grid-template-columns:1fr 1.2fr;gap:40px;
+    background:rgba(15,77,51,0.3);
+    border:1px solid rgba(201,162,39,0.3);
+    border-radius:20px;padding:40px;
+  }
+  .contact-info h3{color:var(--gold);font-size:24px;margin-bottom:20px;}
+  .contact-info p{color:rgba(245,240,225,0.8);margin-bottom:25px;}
+  .contact-item{
+    display:flex;align-items:center;gap:12px;
+    margin-bottom:15px;color:var(--cream);font-size:15px;
+  }
+  .contact-item .ci{
+    width:40px;height:40px;border-radius:50%;
+    background:rgba(201,162,39,0.15);border:1px solid var(--gold);
+    display:flex;align-items:center;justify-content:center;
+    font-size:18px;flex-shrink:0;
+  }
+  .social-row{display:flex;gap:12px;margin-top:25px;flex-wrap:wrap;}
+  .social-btn{
+    width:48px;height:48px;border-radius:50%;
+    background:rgba(201,162,39,0.15);border:1px solid var(--gold);
+    display:flex;align-items:center;justify-content:center;
+    font-size:22px;text-decoration:none;color:var(--gold);
+    transition:all 0.3s;
+  }
+  .social-btn:hover{background:var(--gold);color:var(--green-dark);transform:translateY(-3px);}
+  .contact-form input,
+  .contact-form textarea{
+    width:100%;padding:14px 18px;
+    background:rgba(6,26,18,0.8);
+    border:1px solid rgba(201,162,39,0.3);
+    border-radius:10px;color:var(--cream);
+    font-family:'Cairo',sans-serif;font-size:15px;
+    margin-bottom:15px;transition:border 0.3s;
+  }
+  .contact-form input:focus,
+  .contact-form textarea:focus{outline:none;border-color:var(--gold);}
+  .contact-form textarea{resize:vertical;min-height:110px;}
+  .contact-form button{width:100%;justify-content:center;}
+
+  /* الفوتر */
+  footer{
+    background:var(--green-dark);border-top:2px solid var(--gold);
+    padding:50px 0 20px;position:relative;z-index:1;
+  }
+  .footer-grid{
+    display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;
+    gap:30px;margin-bottom:30px;
+  }
+  .footer-brand{display:flex;align-items:center;gap:12px;margin-bottom:15px;}
+  .footer-col h4{color:var(--gold);font-size:16px;margin-bottom:18px;}
+  .footer-col ul{list-style:none;}
+  .footer-col ul li{margin-bottom:10px;}
+  .footer-col ul a{
+    color:rgba(245,240,225,0.7);text-decoration:none;
+    font-size:14px;transition:color 0.3s;
+  }
+  .footer-col ul a:hover{color:var(--gold);}
+  .footer-col p{color:rgba(245,240,225,0.7);font-size:14px;}
+  .footer-bottom{
+    text-align:center;padding-top:20px;
+    border-top:1px solid rgba(201,162,39,0.2);
+    color:rgba(245,240,225,0.5);font-size:13px;
+  }
+  .footer-bottom span{color:var(--gold);}
+
+  /* زر العودة للأعلى */
+  #toTop{
+    position:fixed;bottom:25px;left:25px;
+    width:50px;height:50px;border-radius:50%;
+    background:linear-gradient(135deg, var(--gold), var(--gold-light));
+    color:var(--green-dark);border:none;font-size:22px;cursor:pointer;
+    display:none;align-items:center;justify-content:center;
+    box-shadow:0 8px 20px rgba(201,162,39,0.4);
+    z-index:999;transition:all 0.3s;
+  }
+  #toTop.show{display:flex;}
+  #toTop:hover{transform:translateY(-5px);}
+
+  /* Responsive */
+  @media (max-width:900px){
+    .hero-grid{grid-template-columns:1fr;gap:40px;}
+    .hero h2{font-size:38px;}
+    .about-grid{grid-template-columns:1fr;}
+    .contact-wrap{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:1fr 1fr;}
+    nav ul{
+      position:fixed;top:75px;right:0;left:0;
+      background:var(--green-dark);flex-direction:column;
+      padding:20px;gap:15px;
+      border-bottom:2px solid var(--gold);
+      transform:translateY(-150%);transition:transform 0.4s;z-index:999;
+    }
+    nav ul.open{transform:translateY(0);}
+    .menu-btn{display:block;}
+  }
+  @media (max-width:500px){
+    .hero h2{font-size:30px;}
+    .section-title h2{font-size:32px;}
+    .pm-card{padding:20px;}
+    .contact-wrap{padding:25px;}
+    .vote-box{padding:25px;}
+    .footer-grid{grid-template-columns:1fr;}
+  }
+
+  .reveal{opacity:0;transform:translateY(30px);transition:all 0.8s ease;}
+  .reveal.active{opacity:1;transform:translateY(0);}
+</style>
+</head>
+<body>
+
+<!-- شاشة التحميل -->
+<div id="loader">
+  <div class="loader-emblem">☪</div>
+  <div class="loader-text">الدولة القريفانية</div>
+  <div class="loader-bar"><span></span></div>
+</div>
+
+<div class="bg-pattern"></div>
+
+<!-- الهيدر -->
+<header>
+  <div class="container nav-wrap">
+    <a href="#home" class="brand">
+      <div class="brand-emblem">☪</div>
+      <div class="brand-text">
+        <h1>رئاسة الوزراء</h1>
+        <p>الدولة القريفانية</p>
+      </div>
+    </a>
+    <nav>
+      <ul id="navMenu">
+        <li><a href="#home">الرئيسية</a></li>
+        <li><a href="#about">عن الرئيس</a></li>
+        <li><a href="#program">البرنامج</a></li>
+        <li><a href="#news">الأخبار</a></li>
+        <li><a href="#decisions">القرارات</a></li>
+        <li><a href="#ministries">الوزارات</a></li>
+        <li><a href="#vote">التصويت</a></li>
+        <li><a href="#contact">التواصل</a></li>
+      </ul>
+    </nav>
+    <button class="menu-btn" id="menuBtn">☰</button>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero" id="home">
+  <div class="container hero-grid">
+    <div class="hero-text">
+      <span class="hero-badge">★ بوابة رسمية ★</span>
+      <h2>رئاسة الوزراء<br><span>الدولة القريفانية</span></h2>
+      <p class="role">Eng / Kareem Akrab — رئيس الوزراء</p>
+      <p class="edu">طالب بكلية الحاسبات والذكاء الاصطناعي</p>
+      <div class="hero-btns">
+        <a href="#program" class="btn btn-primary">📜 البرنامج الحكومي</a>
+        <a href="#contact" class="btn btn-outline">📩 تواصل معي</a>
+      </div>
+    </div>
+    <div class="pm-card reveal">
+      <div class="pm-card-header">
+        <div>
+          <h3>بطاقة رئيس الوزراء</h3>
+          <p style="font-size:12px;color:rgba(245,240,225,0.6);">Prime Minister ID</p>
+        </div>
+        <div class="flag"></div>
+      </div>
+      <div class="pm-row">
+        <span class="label">الاسم الكامل</span>
+        <span class="value">Eng / Kareem Akrab</span>
+      </div>
+      <div class="pm-row">
+        <span class="label">المنصب</span>
+        <span class="value gold">رئيس الوزراء</span>
+      </div>
+      <div class="pm-row">
+        <span class="label">رقم الهوية</span>
+        <span class="value">3193 2283 97</span>
+      </div>
+      <div class="pm-row">
+        <span class="label">المؤهل</span>
+        <span class="value">حاسبات وذكاء اصطناعي</span>
+      </div>
+      <div class="pm-row" style="border:none;">
+        <span class="label">الحالة</span>
+        <span class="pm-status">● سارية</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- عن رئيس الوزراء -->
+<section id="about" style="background:rgba(10,46,31,0.4);">
+  <div class="container">
+    <div class="section-title">
+      <h2>عن رئيس الوزراء</h2>
+      <div class="divider"></div>
+      <p>نبذة تعريفية عن معالي رئيس الوزراء</p>
+    </div>
+    <div class="about-grid">
+      <div class="about-avatar reveal">👤</div>
+      <div class="about-text reveal">
+        <h3>Eng / Kareem Akrab</h3>
+        <p class="role-line">رئيس وزراء الدولة القريفانية</p>
+        <p>
+          رئيس الوزراء القريفاني، طالب بكلية الحاسبات والذكاء الاصطناعي، ويؤمن بأن بناء الدولة
+          يبدأ من التعليم والتكنولوجيا. يقود حكومة تهدف إلى تحويل الدولة القريفانية إلى دولة رقمية
+          متكاملة تعتمد على الابتكار والذكاء الاصطناعي في جميع قطاعاتها.
+        </p>
+        <p>
+          يضع رئيس الوزراء نصب عينيه خدمة المواطن القريفاني، وتطوير الخدمات الحكومية، ورفع مكانة
+          الدولة على المستوى الإقليمي والدولي.
+        </p>
+        <div class="about-tags">
+          <span class="about-tag">🎓 حاسبات وذكاء اصطناعي</span>
+          <span class="about-tag">💡 التحول الرقمي</span>
+          <span class="about-tag">🌍 الدبلوماسية</span>
+          <span class="about-tag">🚀 الابتكار</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- البرنامج الحكومي -->
+<section id="program">
+  <div class="container">
+    <div class="section-title">
+      <h2>البرنامج الحكومي</h2>
+      <div class="divider"></div>
+      <p>رؤية الدولة القريفانية للنهضة والتنمية</p>
+    </div>
+    <div class="program-grid">
+      <div class="program-card reveal">
+        <div class="program-icon">🎓</div>
+        <h3>التعليم والبحث العلمي</h3>
+        <p>تطوير المناهج التعليمية، ودعم البحث العلمي، وربط التعليم بسوق العمل ومتطلبات العصر الرقمي.</p>
+      </div>
+      <div class="program-card reveal">
+        <div class="program-icon">🏥</div>
+        <h3>الصحة</h3>
+        <p>تحسين الخدمات الصحية، وتوفير الرعاية الشاملة للمواطنين، وتطوير المستشفيات والمراكز الطبية.</p>
+      </div>
+      <div class="program-card reveal">
+        <div class="program-icon">💼</div>
+        <h3>الاقتصاد والتجارة</h3>
+        <p>دعم المشروعات الصغيرة والمتوسطة، وجذب الاستثمارات، وتنشيط التجارة الداخلية والخارجية.</p>
+      </div>
+      <div class="program-card reveal">
+        <div class="program-icon">🌍</div>
+        <h3>الخارجية</h3>
+        <p>تعزيز العلاقات الدبلوماسية مع الدول الشقيقة والصديقة، ورفع مكانة الدولة القريفانية إقليمياً ودولياً.</p>
+      </div>
+      <div class="program-card reveal">
+        <div class="program-icon">🛡️</div>
+        <h3>الداخلية والأمن</h3>
+        <p>تحقيق الأمن والاستقرار، وتطوير الأجهزة الأمنية، وحماية المواطنين والممتلكات العامة.</p>
+      </div>
+      <div class="program-card reveal">
+        <div class="program-icon">🎭</div>
+        <h3>الثقافة والإعلام</h3>
+        <p>دعم الثقافة والفنون، وتطوير الإعلام الوطني، وإبراز الهوية القريفانية للعالم.</p>
+      </div>
+      <div class="program-card reveal">
+        <div class="program-icon">🤖</div>
+        <h3>التحول الرقمي والذكاء الاصطناعي</h3>
+        <p>بناء دولة رقمية متكاملة، وتطبيق حلول الذكاء الاصطناعي في جميع القطاعات الحكومية والخدمية.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- الأخبار -->
+<section id="news" style="background:rgba(10,46,31,0.4);">
+  <div class="container">
+    <div class="section-title">
+      <h2>الأخبار والبيانات الرسمية</h2>
+      <div class="divider"></div>
+      <p>آخر أخبار ومستجدات الدولة القريفانية</p>
+    </div>
+    <div class="news-grid">
+      <div class="news-card reveal">
+        <div class="news-head">
+          <span class="cat">بيان رسمي</span>
+          <span class="date">📅 2025</span>
+        </div>
+        <div class="news-body">
+          <h4>تشكيل الحكومة القريفانية الجديدة</h4>
+          <p>أعلن رئيس الوزراء عن تشكيل الحكومة الجديدة، التي تضم نخبة من الكفاءات في مختلف المجالات لخدمة الدولة والمواطنين.</p>
+        </div>
+      </div>
+      <div class="news-card reveal">
+        <div class="news-head">
+          <span class="cat">إنجاز</span>
+          <span class="date">📅 2025</span>
+        </div>
+        <div class="news-body">
+          <h4>إطلاق مبادرة التحول الرقمي</h4>
+          <p>أطلقت رئاسة الوزراء مبادرة وطنية شاملة للتحول الرقمي، تهدف إلى رقمنة جميع الخدمات الحكومية خلال العام الحالي.</p>
+        </div>
+      </div>
+      <div class="news-card reveal">
+        <div class="news-head">
+          <span class="cat">تعاون دولي</span>
+          <span class="date">📅 2025</span>
+        </div>
+        <div class="news-body">
+          <h4>تعزيز العلاقات الدبلوماسية</h4>
+          <p>بحث رئيس الوزراء مع عدد من السفراء سبل تعزيز التعاون المشترك في مجالات التعليم والتكنولوجيا والاستثمار.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- القرارات -->
+<section id="decisions">
+  <div class="container">
+    <div class="section-title">
+      <h2>قرارات وإنجازات</h2>
+      <div class="divider"></div>
+      <p>أبرز قرارات وإنجازات رئاسة الوزراء</p>
+    </div>
+    <div class="decisions-list">
+      <div class="decision-item reveal">
+        <span class="dnum">قرار رقم ١</span>
+        <h4>إنشاء البوابة الرقمية الموحدة</h4>
+        <p>إنشاء بوابة إلكترونية موحدة تجمع جميع الخدمات الحكومية في مكان واحد، تسهيلاً على المواطنين القريفانيين.</p>
+      </div>
+      <div class="decision-item reveal">
+        <span class="dnum">قرار رقم ٢</span>
+        <h4>دعم كلية الحاسبات والذكاء الاصطناعي</h4>
+        <p>تخصيص ميزانية لدعم كلية الحاسبات والذكاء الاصطناعي، وتوفير أحدث الأجهزة والبرامج لطلابها.</p>
+      </div>
+      <div class="decision-item reveal">
+        <span class="dnum">قرار رقم ٣</span>
+        <h4>تطوير المنظومة التعليمية</h4>
+        <p>إطلاق برنامج شامل لتطوير المناهج التعليمية في جميع المراحل، وربطها بمتطلبات سوق العمل الحديث.</p>
+      </div>
+      <div class="decision-item reveal">
+        <span class="dnum">قرار رقم ٤</span>
+        <h4>تعزيز الأمن والاستقرار</h4>
+        <p>تطوير الأجهزة الأمنية، وتزويدها بأحدث التقنيات، لضمان أمن وسلامة المواطنين في جميع أنحاء الدولة.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- الإحصائيات -->
+<section class="stats">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-item reveal">
+        <div class="num" data-count="8">0</div>
+        <div class="lbl">وزارات حكومية</div>
+      </div>
+      <div class="stat-item reveal">
+        <div class="num" data-count="24">0</div>
+        <div class="lbl">خدمة إلكترونية</div>
+      </div>
+      <div class="stat-item reveal">
+        <div class="num" data-count="100">0</div>
+        <div class="lbl">% رضا المواطنين</div>
+      </div>
+      <div class="stat-item reveal">
+        <div class="num" data-count="365">0</div>
+        <div class="lbl">يوم عمل سنوياً</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- الوزارات -->
+<section id="ministries">
+  <div class="container">
+    <div class="section-title">
+      <h2>دليل الوزارات</h2>
+      <div class="divider"></div>
+      <p>الوزارات والجهات الحكومية في الدولة القريفانية</p>
+    </div>
+    <div class="ministries-grid">
+      <div class="ministry-card reveal">
+        <div class="icon">🌍</div>
+        <h4>وزارة الخارجية</h4>
+        <p>العلاقات الدولية والدبلوماسية</p>
+      </div>
+      <div class="ministry-card reveal">
+        <div class="icon">🎓</div>
+        <h4>وزارة التربية والتعليم</h4>
+        <p>التعليم الأساسي والثانوي</p>
+      </div>
+      <div class="ministry-card reveal">
+        <div class="icon">🏥</div>
+        <h4>وزارة الصحة</h4>
+        <p>الرعاية الصحية والخدمات الطبية</p>
+      </div>
+      <div class="ministry-card reveal">
+        <div class="icon">💼</div>
+        <h4>وزارة الاقتصاد</h4>
+        <p>التجارة والاستثمار والتنمية</p>
+      </div>
+      <div class="ministry-card reveal">
+        <div class="icon">🛡️</div>
+        <h4>وزارة الداخلية</h4>
+        <p>الأمن والاستقرار الداخلي</p>
+      </div>
+      <div class="ministry-card reveal">
+        <div class="icon">🎭</div>
+        <h4>وزارة الثقافة</h4>
+        <p>الثقافة والفنون والإعلام</p>
+      </div>
+      <div class="ministry-card reveal">
+        <div class="icon">🤖</div>
+        <h4>وزارة الاتصالات</h4>
+        <p>التحول الرقمي والتكنولوجيا</p>
+      </div>
+      <div class="ministry-card reveal">
+        <div class="icon">⚖️</div>
+        <h4>وزارة العدل</h4>
+        <p>القضاء والحقوق القانونية</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- الخدمات -->
+<section id="services" style="background:rgba(10,46,31,0.4);">
+  <div class="container">
+    <div class="section-title">
+      <h2>الخدمات الحكومية</h2>
+      <div class="divider"></div>
+      <p>خدمات إلكترونية للمواطنين القريفانيين</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card reveal">
+        <div class="icon">📝</div>
+        <h4>تقديم طلب</h4>
+        <p>تقديم الطلبات الرسمية للحكومة إلكترونياً</p>
+      </div>
+      <div class="service-card reveal">
+        <div class="icon">💬</div>
+        <h4>شكاوى المواطنين</h4>
+        <p>تقديم الشكاوى والمقترحات ومتابعتها</p>
+      </div>
+      <div class="service-card reveal">
+        <div class="icon">📢</div>
+        <h4>الإعلانات الرسمية</h4>
+        <p>آخر الأخبار والبيانات الرسمية للدولة</p>
+      </div>
+      <div class="service-card reveal">
+        <div class="icon">🪪</div>
+        <h4>الخدمات المدنية</h4>
+        <p>استخراج الوثائق والبطاقات الرسمية</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- التصويت -->
+<section id="vote">
+  <div class="container">
+    <div class="section-title">
+      <h2>استفتاء المواطنين</h2>
+      <div class="divider"></div>
+      <p>شارك برأيك في قرارات الدولة القريفانية</p>
+    </div>
+    <div class="vote-box reveal">
+      <h3>هل تؤيد مبادرة التحول الرقمي الشاملة؟</h3>
+      <p class="sub">صوتك يهمنا — شارك في بناء الدولة القريفانية</p>
+
+      <div class="vote-option" data-vote="yes">
+        <div class="radio"></div>
+        <div class="text">✅ نعم، أؤيد المبادرة</div>
+      </div>
+      <div class="vote-option" data-vote="no">
+        <div class="radio"></div>
+        <div class="text">❌ لا، أرفض المبادرة</div>
+      </div>
+      <div class="vote-option" data-vote="maybe">
+        <div class="radio"></div>
+        <div class="text">🤔 محتاج تفاصيل أكتر</div>
+      </div>
+
+      <div style="text-align:center;margin-top:20px;">
+        <button class="btn btn-primary" id="submitVote" style="padding:14px 50px;">🗳️ صوّت الآن</button>
+      </div>
+
+      <div class="vote-result" id="voteResult">
+        <div class="result-bar">
+          <div class="top"><span class="name">✅ نعم</span><span class="pct" id="pct-yes">0%</span></div>
+          <div class="track"><div class="fill" id="fill-yes"></div></div>
+        </div>
+        <div class="result-bar">
+          <div class="top"><span class="name">❌ لا</span><span class="pct" id="pct-no">0%</span></div>
+          <div class="track"><div class="fill" id="fill-no"></div></div>
+        </div>
+        <div class="result-bar">
+          <div class="top"><span class="name">🤔 محتاج تفاصيل</span><span class="pct" id="pct-maybe">0%</span></div>
+          <div class="track"><div class="fill" id="fill-maybe"></div></div>
+        </div>
+        <div class="vote-thanks">✅ شكراً لمشاركتك في بناء الدولة القريفانية!</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- التواصل -->
+<section id="contact" style="background:rgba(10,46,31,0.4);">
+  <div class="container">
+    <div class="section-title">
+      <h2>تواصل مع رئاسة الوزراء</h2>
+      <div class="divider"></div>
+      <p>راسل رئيس الوزراء مباشرة</p>
+    </div>
+    <div class="contact-wrap">
+      <div class="contact-info">
+        <h3>مكتب رئيس الوزراء</h3>
+        <p>نرحب بجميع استفساراتكم ومقترحاتكم لخدمة الدولة القريفانية ومواطنيها.</p>
+        <div class="contact-item">
+          <div class="ci">👤</div>
+          <span>Eng / Kareem Akrab</span>
+        </div>
+        <div class="contact-item">
+          <div class="ci">🏛️</div>
+          <span>رئاسة الوزراء — الدولة القريفانية</span>
+        </div>
+        <div class="contact-item">
+          <div class="ci">🎓</div>
+          <span>كلية الحاسبات والذكاء الاصطناعي</span>
+        </div>
+        <div class="social-row">
+          <a href="#" class="social-btn" title="واتساب">💬</a>
+          <a href="#" class="social-btn" title="تليجرام">✈️</a>
+          <a href="#" class="social-btn" title="فيسبوك">📘</a>
+          <a href="#" class="social-btn" title="انستجرام">📷</a>
+          <a href="#" class="social-btn" title="إيميل">✉️</a>
+        </div>
+      </div>
+      <form class="contact-form" onsubmit="event.preventDefault(); alert('✅ تم إرسال رسالتك بنجاح إلى مكتب رئيس الوزراء'); this.reset();">
+        <input type="text" placeholder="الاسم الكامل" required>
+        <input type="email" placeholder="البريد الإلكتروني" required>
+        <input type="text" placeholder="الموضوع" required>
+        <textarea placeholder="اكتب رسالتك هنا..." required></textarea>
+        <button type="submit" class="btn btn-primary">📩 إرسال الرسالة</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- الفوتر -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div class="footer-brand">
+          <div class="brand-emblem">☪</div>
+          <div class="brand-text">
+            <h1>رئاسة الوزراء</h1>
+            <p>الدولة القريفانية</p>
+          </div>
+        </div>
+        <p>بوابة رسمية تابعة لرئاسة الوزراء في الدولة القريفانية، تهدف لخدمة المواطنين وتقديم الخدمات الحكومية إلكترونياً.</p>
+      </div>
+      <div class="footer-col">
+        <h4>روابط سريعة</h4>
+        <ul>
+          <li><a href="#home">الرئيسية</a></li>
+          <li><a href="#about">عن الرئيس</a></li>
+          <li><a href="#program">البرنامج الحكومي</a></li>
+          <li><a href="#news">الأخبار</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>الحكومة</h4>
+        <ul>
+          <li><a href="#ministries">الوزارات</a></li>
+          <li><a href="#services">الخدمات</a></li>
+          <li><a href="#decisions">القرارات</a></li>
+          <li><a href="#vote">الاستفتاء</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>تواصل معنا</h4>
+        <ul>
+          <li><a href="#contact">اتصل بنا</a></li>
+          <li><a href="#">عن الدولة</a></li>
+          <li><a href="#">الرموز الوطنية</a></li>
+          <li><a href="#">الخريطة الرسمية</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © 2025 <span>الدولة القريفانية</span> — جميع الحقوق محفوظة | رئاسة الوزراء
+    </div>
+  </div>
+</footer>
+
+<button id="toTop">↑</button>
+
+<script>
+  // شاشة التحميل
+  window.addEventListener('load', () => {
+    setTimeout(() => document.getElementById('loader').classList.add('hide'), 1800);
+  });
+
+  // قائمة الموبايل
+  const menuBtn = document.getElementById('menuBtn');
+  const navMenu = document.getElementById('navMenu');
+  menuBtn.addEventListener('click', () => navMenu.classList.toggle('open'));
+  navMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navMenu.classList.remove('open')));
+
+  // ظهور العناصر
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('active'); });
+  }, {threshold: 0.15});
+  reveals.forEach(r => io.observe(r));
+
+  // العدادات
+  const counters = document.querySelectorAll('.num');
+  const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        const el = entry.target;
+        const target = +el.dataset.count;
+        let cur = 0;
+        const step = Math.max(1, Math.ceil(target / 50));
+        const timer = setInterval(() => {
+          cur += step;
+          if(cur >= target){cur = target; clearInterval(timer);}
+          el.textContent = cur;
+        }, 30);
+        counterObserver.unobserve(el);
+      }
+    });
+  }, {threshold: 0.5});
+  counters.forEach(c => counterObserver.observe(c));
+
+  // زر العودة للأعلى
+  const toTop = document.getElementById('toTop');
+  window.addEventListener('scroll', () => toTop.classList.toggle('show', window.scrollY > 500));
+  toTop.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+
+  // نظام التصويت
+  const voteOptions = document.querySelectorAll('.vote-option');
+  let selectedVote = null;
+  voteOptions.forEach(opt => {
+    opt.addEventListener('click', () => {
+      voteOptions.forEach(o => o.classList.remove('selected'));
+      opt.classList.add('selected');
+      selectedVote = opt.dataset.vote;
+    });
+  });
+
+  document.getElementById('submitVote').addEventListener('click', () => {
+    if(!selectedVote){
+      alert('⚠️ من فضلك اختر إجابة أولاً');
+      return;
+    }
+    // نتائج افتراضية
+    const results = {yes: 68, no: 12, maybe: 20};
+    // نزود صوت المستخدم
+    results[selectedVote] += 1;
+    const total = results.yes + results.no + results.maybe;
+    const pct = {
+      yes: Math.round(results.yes / total * 100),
+      no: Math.round(results.no / total * 100),
+      maybe: Math.round(results.maybe / total * 100)
+    };
+
+    document.getElementById('voteResult').classList.add('show');
+    setTimeout(() => {
+      document.getElementById('fill-yes').style.width = pct.yes + '%';
+      document.getElementById('fill-no').style.width = pct.no + '%';
+      document.getElementById('fill-maybe').style.width = pct.maybe + '%';
+      document.getElementById('pct-yes').textContent = pct.yes + '%';
+      document.getElementById('pct-no').textContent = pct.no + '%';
+      document.getElementById('pct-maybe').textContent = pct.maybe + '%';
+    }, 100);
+    document.getElementById('submitVote').disabled = true;
+    document.getElementById('submitVote').textContent = '✅ تم التصويت';
+  });
+</script>
+
+</body>
+  </html>
